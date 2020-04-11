@@ -1282,14 +1282,14 @@ describe('parse features', function() {
 			  fgColor: { theme: 9, raw_rgb: 'F79646' },
 			  bgColor: { theme: 5, raw_rgb: 'C0504D' } },
 			{ patternType: 'darkUp',
-			  fgColor: { theme: 3, raw_rgb: 'EEECE1' },
+			  fgColor: { theme: 3, raw_rgb: '1F497D' },
 			  bgColor: { theme: 7, raw_rgb: '8064A2' } },
 			{ patternType: 'darkGray',
-			  fgColor: { theme: 3, raw_rgb: 'EEECE1' },
-			  bgColor: { theme: 1, raw_rgb: 'FFFFFF' } },
+			  fgColor: { theme: 3, raw_rgb: '1F497D' },
+			  bgColor: { theme: 1, raw_rgb: '000000' } },
 			{ patternType: 'lightGray',
 			  fgColor: { theme: 6, raw_rgb: '9BBB59' },
-			  bgColor: { theme: 2, raw_rgb: '1F497D' } },
+			  bgColor: { theme: 2, raw_rgb: 'EEECE1' } },
 			{ patternType: 'lightDown',
 			  fgColor: { theme: 4, raw_rgb: '4F81BD' },
 			  bgColor: { theme: 7, raw_rgb: '8064A2' } },
@@ -1298,9 +1298,9 @@ describe('parse features', function() {
 			  bgColor: { theme: 9, raw_rgb: 'F79646' } },
 			{ patternType: 'lightGrid',
 			  fgColor: { theme: 4, raw_rgb: '4F81BD' },
-			  bgColor: { theme: 2, raw_rgb: '1F497D' } },
+			  bgColor: { theme: 2, raw_rgb: 'EEECE1' } },
 			{ patternType: 'lightVertical',
-			  fgColor: { theme: 3, raw_rgb: 'EEECE1' },
+			  fgColor: { theme: 3, raw_rgb: '1F497D' },
 			  bgColor: { theme: 7, raw_rgb: '8064A2' } }
 		];
 		/*eslint-enable */
@@ -1422,10 +1422,10 @@ function seq(end/*:number*/, start/*:?number*/)/*:Array<number>*/ {
 }
 
 var basedate = new Date(1899, 11, 30, 0, 0, 0); // 2209161600000
-var dnthresh = basedate.getTime() + (new Date().getTimezoneOffset() - basedate.getTimezoneOffset()) * 60000;
 function datenum(v/*:Date*/, date1904/*:?boolean*/)/*:number*/ {
 	var epoch = v.getTime();
-	if(date1904) epoch += 1462*24*60*60*1000;
+	if(date1904) epoch -= 1462*24*60*60*1000;
+	var dnthresh = basedate.getTime() + (v.getTimezoneOffset() - basedate.getTimezoneOffset()) * 60000;
 	return (epoch - dnthresh) / (24 * 60 * 60 * 1000);
 }
 var good_pd_date = new Date('2017-02-19T19:06:09.000Z');
